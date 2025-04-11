@@ -17,7 +17,6 @@
 from flask import Flask, render_template, request, redirect
 from datetime import timedelta, datetime
 from time import time
-import paho.mqtt.client as mqtt
 import json
 import socket
 
