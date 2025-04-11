@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/stilenave.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <title>Monitoraggio casa - MQTT - JSON</title>
+    <meta http-equiv="refresh" content="{{REFRESH}}" />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;  /* Centra orizzontalmente il contenuto */
+        justify-content: center; /* Centra verticalmente il contenuto */
+
+        margin: 0;
+      }
+
+      #griglia {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Due colonne */
+        grid-template-rows: 1fr 1fr; /* Due righe */
+        gap: 20px; /* Spaziatura tra i grafici */
+        justify-items: center; /* Centra i grafici orizzontalmente nelle celle */
+        align-items: center; /* Centra i grafici verticalmente nelle celle */
+      }
+
+      .grafico {
+        width: 200px; /* Larghezza dei grafici */
+        height: 200px; /* Altezza dei grafici */
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Orto Verticale Autonomo</h2>
+    <hr />
+    <br />
+    Rilevazione: {{rilevazione}}
+    <hr />
+   
+    
+    <div id="griglia">
+      <div id="g1" class="grafico"></div>
+      <div id="g2" class="grafico"></div>
+      <div id="g3" class="grafico"></div>
+      <div id="g4" class="grafico"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='raphael-2.1.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='justgage.js') }}"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function(event) {
+          var g1 = new JustGage({
+              id: "g1",
+              value: {{temperaturaaria}},
+              min: 5,
+              max: 40,
+              title: "Temperatura aria",
+              levelColors: ["#00ff00", "#ffaa19", "#ff0000"],
+              humanFriendly: true,
+              symbol: "°C",
+              formatNumber: true,
+              pointer: true,
+              valueFontColor: "white",
+              labelFontColor: "white",
+              pointerOptions: {
+                  toplength: -15,
+                  bottomlength: 10,
+                  bottomwidth: 12,
+                  color: 'blue',
+                  stroke: '#ffffff',
+                  stroke_width: 3,
+                  stroke_linecap: 'round'
+             },
+          });
+          var g2 = new JustGage({
+              id: "g2",
+              value: {{umiditaaria}},
+              min: 20,
+              max: 70,
+              title: "Umidità aria",
+              levelColors: ["#00ff00", "#ffaa19", "#ff0000"],
+              humanFriendly: true,
+              donut: false,
+              pointer: true,
+              valueFontColor: "white",
+              labelFontColor: "white",
+            pointerOptions: {
+                toplength: -15,
+                bottomlength: 10,
+                bottomwidth: 12,
+                color: 'blue',
+                stroke: '#ffffff',
+                stroke_width: 3,
+                stroke_linecap: 'round'
+              },
+            symbol: "%",
+            percents: true,
+          });
+          var g3 = new JustGage({
+              id: "g3",
+              value: {{umiditaterrenosopra}},
+              min: 0,
+              max: 100,
+              title: "Umidità terreno sopra",
+              levelColors: ["#00ff00", "#ffaa19", "#ff0000"],
+              humanFriendly: true,
+              donut: false,
+              pointer: true,
+              valueFontColor: "white",
+              labelFontColor: "white",
+            pointerOptions: {
+                  toplength: -15,
+                  bottomlength: 10,
+                  bottomwidth: 12,
+                  color: 'blue',
+                  stroke: '#ffffff',
+                  stroke_width: 3,
+                  stroke_linecap: 'round'
+             },
+            symbol: "%",
+            percents: true,
+          });
+          var g4 = new JustGage({
+              id: "g4",
+              value: {{umiditaterrenosotto}},
+              min: 0,
+              max: 100,
+              title: "Umidità terreno sotto",
+              levelColors: ["#00ff00", "#ffaa19", "#ff0000"],
+              humanFriendly: true,
+              donut: false,
+              pointer: true,
+              valueFontColor: "white",
+              labelFontColor: "white",
+            pointerOptions: {
+                  toplength: -15,
+                  bottomlength: 10,
+                  bottomwidth: 12,
+                  color: 'blue',
+                  stroke: '#ffffff',
+                  stroke_width: 3,
+                  stroke_linecap: 'round'
+             },
+            symbol: "%",
+            percents: true,
+          });
+      });
+    </script>
+    <hr />
+    <p>Aggiornamento ogni {{REFRESH}} secondi.</p>
+  </body>
+</html>

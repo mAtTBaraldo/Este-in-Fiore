@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../static/stilenave.css" rel="stylesheet" type="text/css" />
+    <title>Monitoraggio casa - MQTT - JSON</title>
+    <meta http-equiv="refresh" content="{{REFRESH}}" />
+  </head>
+  <body>
+    <h2>Laboratorio LTR<br />AS 2020_2021/v.2025<br />IoT</h2>
+    <hr />
+    COSTA SMERALDA
+    <br />
+    <hr />
+    data-ora
+    <hr />
+    <div class="bottoni">
+      <form method="GET" action="/seleziona">
+        <label for="Cabina">Cabina</label>
+        <input type="number" name="cabina" id="cabina" />
+        <button type="submit" name="selettore" value="1">Tempo Reale</button>
+        <button type="submit" name="selettore" value="2">Giornata</button>
+      </form>
+    </div>
+    <hr />
+    <div class="bottoni">
+      <button>Spegni</button>
+      <button>Accendi</button>
+    </div>
+    <hr />
+  </body>
+</html>
